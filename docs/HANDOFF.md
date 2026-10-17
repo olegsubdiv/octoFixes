@@ -1,5 +1,19 @@
 # Состояние проекта
 
+## Ожидает закрытия игры: RelicRpsChoice
+
+Пользователь поручил установить ручной КНБ за реликвии, но продолжает играть.
+Игру/mods не менять до сообщения о закрытии. Подготовлена отдельная локальная
+сборка официальных исходников Mikhailovichi/STS2 (commit bad7dff55e0323d299a177b69988d5e1ad65d341):
+diagnostics/RelicRpsChoice-prepared/prepared-mod/RelicRpsChoice.dll + RelicRpsChoice.json.
+Детали — diagnostics/RelicRpsChoice-prepared/PREPARATION.txt. Для установленной игры
+исправлено только имя API IsSinglePlayerOrFakeMultiplayer → IsSingleplayerOrFakeMultiplayer;
+сборка SDK8 с .NET9 references и генераторами Godot, вывод перенаправлен вне игры.
+Сборка без предупреждений и 30 проверок автора прошли; игровой кооп ещё не проверен.
+После закрытия игры установить отдельной папкой mods/RelicRpsChoice, предварительно
+проверить отсутствие новой установки/сохранить backup, сверить DLL/JSON.
+Это сторонний мод: не включать в публичные сборки octoFixes. Для коопа всем одинаковая DLL.
+
 ## octoFixes — объединение 2026-10-17
 
 По согласованному поручению пользователя проект преобразован в единый octoFixes.
