@@ -1,0 +1,11 @@
+bin/
+obj/
+dist/
+*.user
+diagnostics/
+save-backup/
+*.save
+*.save.backup
+*.log
+.vs/
+artifacts/

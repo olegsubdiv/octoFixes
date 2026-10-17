@@ -1,0 +1,23 @@
+<Project>
+  <PropertyGroup>
+    <!-- .NET 8 SDK compatibility: use the game's installed .NET 9 runtime references. -->
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>12.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <NoStdLib>true</NoStdLib>
+    <NoWarn>$(NoWarn);MSB3277;CS1701;CS1702;CA1416</NoWarn>
+    <Sts2Dir Condition="'$(Sts2Dir)' == ''">$(STS2_GAME_DIR)\data_sts2_windows_x86_64</Sts2Dir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="$(Net9RuntimeDir)\System.*.dll;$(Net9RuntimeDir)\Microsoft.CSharp.dll;$(Net9RuntimeDir)\netstandard.dll;$(Net9RuntimeDir)\mscorlib.dll"
+               Exclude="$(Net9RuntimeDir)\*.Native.dll;$(Net9RuntimeDir)\System.IO.Compression.FileSystem.dll">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="sts2"><HintPath>$(Sts2Dir)\sts2.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(Sts2Dir)\0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="GodotSharp"><HintPath>$(Sts2Dir)\GodotSharp.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>
