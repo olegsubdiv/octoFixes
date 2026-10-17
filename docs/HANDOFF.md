@@ -1,5 +1,23 @@
 # Состояние проекта
 
+## Вылет на Tempest / Dark Magician — 2026-10-18
+
+Пользователь попросил проверить вылет во время каста. Последняя карта в логе —
+TEMPEST, ранее в том же бою разыгран THEHEROEXPANSION-DARK_MAGICIAN.
+TheHeroExpansion.DarkMagicianPatch.OrbChannelPatch.Postfix использует
+Task.ContinueWith(... OrbCmd.Channel<DarkOrb> ...).Unwrap() без игрового scheduler;
+стек ошибок прямо показывает выполнение этой continuation в ThreadPool.
+Далее Godot пишет об обращениях к NOrbManager/PlayEvokeSfx вне главного потока.
+Windows Application 1000/1001: вылет 00:07:31, ntdll.dll, 0xc0000374 (heap corruption).
+Ошибка фоновой работы со сценой подтверждена; связь с нативным вылетом очень
+вероятна, но дамп не разобран. Связь с фиксом Void Form не обнаружена.
+Снимок предыдущей сессии и декомпиляция установленного DarkMagicianPatch:
+diagnostics/crash-2026-10-18 (локально, не публиковать).
+Игра уже перезапущена; установленная octoFixes 1.0.2 не менялась.
+Патч этой ошибки ещё не реализован. Возможное исправление: заменить опасный
+postfix на последовательный await с сохранением игрового SynchronizationContext
+и распространением ошибок исходной операции, сохранив ровно одну бонусную сферу.
+
 ## Void Form завершала ход при стартовом автоигрывании — 2026-10-17
 
 Причина подтверждена по установленным DLL: VoidForm.OnPlay вызывает PlayerCmd.EndTurn;
