@@ -143,7 +143,12 @@ try {
     if (-not $release) {
         Invoke-Checked gh @('release', 'create', $tag, '--repo', $repo, '--verify-tag', '--draft',
             '--title', "octoFixes $version", '--notes-file', $notes) | Out-Host
-        $release = Get-Release
+        # GitHub's releases listing may briefly lag behind a successful draft creation.
+        for ($attempt = 0; $attempt -lt 5; $attempt++) {
+            $release = Get-Release
+            if ($release) { break }
+            if ($attempt -lt 4) { Start-Sleep -Seconds 1 }
+        }
         if (-not $release -or -not $release.draft) { throw 'Expected draft release after creation.' }
     }
     # Retrying a partial upload is safe: compare existing bytes, upload only missing assets.
