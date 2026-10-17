@@ -20,5 +20,8 @@ public static class EntryPoint
         }
         MultiEnchantmentCoopFix.ModMain.Initialize();
         HextechFormRuneCoopFix.ModMain.Initialize();
+        HextechFormRuneCoopFix.RewardChoicePatches.LogInfo = s => MultiEnchantmentCoopFix.ModMain.Log.Info(s);
+        HextechFormRuneCoopFix.RewardChoicePatches.LogWarn = s => MultiEnchantmentCoopFix.ModMain.Log.Warn(s);
+        HextechFormRuneCoopFix.RewardChoicePatches.Initialize();
     }
 }

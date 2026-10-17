@@ -1,13 +1,9 @@
-# История изменений
+# Changelog
+
+## 1.0.1 — 2026-10-17
+
+Fix Double Vision skipping RelicRewardChoices rewards. The selected relic is copied through Hextech's own grant/sync logic, with guards against skipped and repeated claims.
 
 ## 1.0.0 — 2026-10-17
 
-Первый объединённый выпуск octoFixes. Включает проверенные изменения
-MultiEnchantment Co-op Fix 1.1.1 и Hextech Form Rune Co-op Fix 1.1.1:
-стабильные сетевые свойства и проверки пулов, очистку истории зачарований,
-детерминированный автоплей форм, устранение призраков форм в руке и серию
-повторов настоящей Neutralize/Suppress.
-
-Один установщик заменяет оба старых мода с резервной копией. Один ZIP доступен
-по постоянной ссылке GitHub Releases. Логика исправлений сохранена;
-Evolution пока остаётся отдельным неисправленным подозрением.
+Combine the enchantment co-op and Hextech companion fixes into one mod. Include Form hand-visual fixes, a migration installer and a permanent GitHub release download.

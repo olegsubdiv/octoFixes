@@ -220,6 +220,7 @@ internal static class Program
             Check("base 0 clamped to 1", NeutralizeRunePatches.TotalPlays(2, 2, 0) == 4);
         }
 
+        RewardChoiceTests.Run(Check, gameData);
         Console.WriteLine(_failed == 0 ? "ALL TESTS PASSED" : _failed + " TEST(S) FAILED");
         return _failed == 0 ? 0 : 1;
     }
