@@ -142,6 +142,7 @@ internal static class Program
         BindResult bind = FormRunePatches.BindToAssembly(hextech, harmony);
         Check("bind verified 5 rune types", bind.Verified.Count == 5);
         Check("bind unverified 0", bind.Unverified.Count == 0);
+        FormTurnTests.Run(Check, hextech);
 
         // 6. Runtime proof: calling the (shared-generic) hook on each rune type hits our prefix and returns a completed
         //    task without running Hextech's body. Instances are created without running constructors.

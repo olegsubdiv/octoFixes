@@ -3,7 +3,7 @@
   "name": "octoFixes",
   "author": "olegsubdiv",
   "description": "Co-op enchantment sync, Hextech Form auto-play, Neutralize replay, and Double Vision compatibility with RelicRewardChoices. Replaces both old companion fixes. All players need the same version.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "has_pck": false,
   "has_dll": true,
   "affects_gameplay": true,

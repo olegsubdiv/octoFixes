@@ -15,6 +15,7 @@ the same octoFixes version. Original Workshop mods are installed separately.
 - Stable multiplayer property IDs and content-pool checks prevent known enchantment/config desyncs.
 - Redundant enchantment history is removed, including orphaned Spiral data after Primal Force transforms.
 - Hextech Form runes auto-play consistently; cards played from hand no longer leave ghost images.
+- Rune auto-played Void Form preserves the turn using Hextech's scoped suppression.
 - Neutralize Upgrade replays the real card, preserving Momentum. This changes some replay-series interactions.
 - Double Vision duplicates relics selected through RelicRewardChoices using Hextech's own grant/sync logic.
   Skips and repeated selection attempts do not grant extra copies. Already-claimed rewards are not retroactively duplicated.

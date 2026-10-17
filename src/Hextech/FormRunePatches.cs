@@ -49,6 +49,7 @@ public static class FormRunePatches
     private static volatile bool _bound;
     private static bool _loggedNotLoaded;
     private static volatile Dictionary<Type, Type> _runeToCard = new Dictionary<Type, Type>();
+    private static MethodInfo? _beginEndTurnSuppression;
 
     // Marker "already ran for (combat state, player NetId)". Weak keys: nothing to reset between combats.
     private static readonly ConditionalWeakTable<object, HashSet<ulong>> DoneByCombat = new ConditionalWeakTable<object, HashSet<ulong>>();
@@ -201,6 +202,14 @@ public static class FormRunePatches
             LogWarn($"[FormRuneFix] HextechRunes loaded ({asm.GetName().Version}) but no {RuneBaseTypeName} rune types found; nothing to do.");
             return result;
         }
+
+        // Resolve before disabling the original hooks: the replacement must preserve this scope.
+        MethodInfo? suppress = asm.GetType("HextechRunes.HextechFormAutoPlayHooks")?.GetMethod(
+            "BeginEndTurnSuppression", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic,
+            null, Type.EmptyTypes, null);
+        if (suppress == null || !typeof(IDisposable).IsAssignableFrom(suppress.ReturnType))
+            throw new MissingMethodException("Hextech form auto-play end-turn suppression unavailable; original hooks preserved.");
+        _beginEndTurnSuppression = suppress;
 
         HarmonyMethod prefix = new HarmonyMethod(AccessTools.Method(typeof(FormRunePatches), nameof(HookPrefix)));
         Dictionary<Type, MethodInfo?> methods = new Dictionary<Type, MethodInfo?>();
@@ -488,7 +497,8 @@ public static class FormRunePatches
                     {
                         LogInfo($"[FormRuneFix] {who}: auto-playing {card.Id} (from {from})");
                     }
-                    await CardCmd.AutoPlay(choiceContext, card, null, AutoPlayType.Default, skipXCapture: false, skipCardPileVisuals: skipVisuals);
+                    await PlayWithTurnSuppressed(() => CardCmd.AutoPlay(choiceContext, card, null,
+                        AutoPlayType.Default, skipXCapture: false, skipCardPileVisuals: skipVisuals));
                     played++;
                 }
                 else if (VerboseLog)
@@ -501,6 +511,14 @@ public static class FormRunePatches
                 LogInfo($"[FormRuneFix] {who} turn 1: rune {relic.Id} auto-played {played}/{cards.Count}");
             }
         }
+    }
+
+    internal static async Task PlayWithTurnSuppressed(Func<Task> play)
+    {
+        // Matches Hextech's original scope; AsyncLocal confines it to this awaited auto-play.
+        using IDisposable scope = (IDisposable)(_beginEndTurnSuppression?.Invoke(null, null)
+            ?? throw new InvalidOperationException("Form end-turn suppression is not bound."));
+        await play();
     }
 
     private static bool IsDrawHandDiscard(PileType? t)

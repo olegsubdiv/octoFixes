@@ -2,7 +2,7 @@
   <PropertyGroup>
     <AssemblyName>octoFixes</AssemblyName>
     <RootNamespace>OctoFixes</RootNamespace>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
   </PropertyGroup>
