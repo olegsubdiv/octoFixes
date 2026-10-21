@@ -12,6 +12,7 @@ the same octoFixes version. Original Workshop mods are installed separately.
 
 ## Fixes
 
+- Orb focus visual null references no longer interrupt power application and desync Smokestack.
 - Stable multiplayer property IDs and content-pool checks prevent known enchantment/config desyncs.
 - Redundant enchantment history is removed, including orphaned Spiral data after Primal Force transforms.
 - Hextech Form runes auto-play consistently; cards played from hand no longer leave ghost images.

@@ -222,6 +222,7 @@ internal static class Program
         }
 
         RewardChoiceTests.Run(Check, gameData);
+        OrbVfxTests.Run(Check);
         Console.WriteLine(_failed == 0 ? "ALL TESTS PASSED" : _failed + " TEST(S) FAILED");
         return _failed == 0 ? 0 : 1;
     }
