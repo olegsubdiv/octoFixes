@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4 — 2026-10-22
+
+Fix Dark Magician creating bonus orbs on a background thread. Await the original channel on the game context; failed or cancelled channels no longer create a bonus.
+
 ## 1.0.3 — 2026-10-22
 
 Fix Smokestack desync caused by a null reference in orb focus visuals. Isolate that visual callback failure so power application and card resolution can finish.

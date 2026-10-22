@@ -19,6 +19,9 @@ public static class EntryPoint
                 "Close the game and run install.bat to migrate them: " + string.Join(", ", loaded));
         }
         MultiEnchantmentCoopFix.ModMain.Initialize();
+        DarkMagicianPatches.LogInfo = s => MultiEnchantmentCoopFix.ModMain.Log.Info(s);
+        DarkMagicianPatches.LogWarn = s => MultiEnchantmentCoopFix.ModMain.Log.Warn(s);
+        DarkMagicianPatches.Initialize();
         OrbVfxPatches.LogWarn = s => MultiEnchantmentCoopFix.ModMain.Log.Warn(s);
         try { OrbVfxPatches.Bind(new HarmonyLib.Harmony(OrbVfxPatches.HarmonyId)); }
         catch (Exception ex) { MultiEnchantmentCoopFix.ModMain.Log.Warn($"[OrbVfxFix] Hook unavailable: {ex.Message}"); }

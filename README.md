@@ -12,6 +12,7 @@ the same octoFixes version. Original Workshop mods are installed separately.
 
 ## Fixes
 
+- Dark Magician bonus orbs preserve the game thread instead of running in the thread pool.
 - Orb focus visual null references no longer interrupt power application and desync Smokestack.
 - Stable multiplayer property IDs and content-pool checks prevent known enchantment/config desyncs.
 - Redundant enchantment history is removed, including orphaned Spiral data after Primal Force transforms.
@@ -28,7 +29,7 @@ Settings: `mods/octoFixes/octoFixes.json`. Logs: `%APPDATA%/SlayTheSpire2/logs/g
 
 ## Build / release
 
-Requires .NET SDK 8+, .NET 9 runtime, the game, HextechRunes, RelicRewardChoices and BaseLib.
+Requires .NET SDK 8+, .NET 9 runtime, the game, HextechRunes, RelicRewardChoices, BaseLib and TheHeroExpansion.
 
 ```powershell
 .\build.ps1 -GameDir 'F:\SteamLibrary\steamapps\common\Slay the Spire 2' -Zip
